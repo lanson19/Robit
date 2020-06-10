@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+		<title>Misha's Robot</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="styles.css">
+		<script src="scripts.js"></script>
+</head>
+
+<body>
+
+	<div id="wdiv">
+		<button class="button" id="w" onclick="wPressed">W</button>
+	</div>
+	<div id="asd">
+		<button class="button" id="a">A</button>
+		<button class="button" id="s">S</button>
+		<button class="button" id="d">D</button>
+	</div>
+
+
+	<div id="uparrowdiv">
+		<button class="button" id="uparrow">Up</button>
+	</div>
+	<div id="arrows">
+		<button class="button" id="downarrow">Down</button>
+		<button class="button" id="leftarrow">Left</button>
+		<button class="button" id="rightarrow">Right</button>
+    </div>
+
+	<div id="video">
+		<iframe id="livestream" width="850" height="475" src="https://www.youtube.com/embed/y7e-GC6oGhg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	</div>
+
+	<script>
+		//Keydown funnction
+		var keys = {w:false, a:false, s:false, d:false, up:false, left:false, down:false, right:false};
+
+		window.addEventListener("keydown", (event) => {
+			if(event.repeat === true){
+				return;
+			}
+
+			console.log(event);
+			if(event.key === "w"){
+				keys.w = true;
+				document.getElementById("w").style.backgroundColor = "#3e8e41";
+				document.getElementById("w").style.transform = "translateY(4px)";
+				document.getElementById("w").style.boxShadow = "0 1px #666";
+			}
+
+			if(event.key === "a"){
+				keys.a = true;
+				document.getElementById("a").style.backgroundColor = "#3e8e41";
+				document.getElementById("a").style.transform = "translateY(4px)";
+				document.getElementById("a").style.boxShadow = "0 1px #666";
+			}
+
+			if(event.key === "s"){
+				keys.s = true;
+				document.getElementById("s").style.backgroundColor = "#3e8e41";
+				document.getElementById("s").style.transform = "translateY(4px)";
+				document.getElementById("s").style.boxShadow = "0 1px #666";
+			}
+
+			if(event.key === "d"){
+				keys.d = true;
+				document.getElementById("d").style.backgroundColor = "#3e8e41";
+				document.getElementById("d").style.transform = "translateY(4px)";
+				document.getElementById("d").style.boxShadow = "0 1px #666";
+			}
+
+			if(event.key === "ArrowUp"){
+				keys.up = true;
+				document.getElementById("uparrow").style.backgroundColor = "#3e8e41";
+				document.getElementById("uparrow").style.transform = "translateY(4px)";
+				document.getElementById("uparrow").style.boxShadow = "0 1px #666";
+			}
+
+			if(event.key === "ArrowDown"){
+				keys.down = true;
+				document.getElementById("downarrow").style.backgroundColor = "#3e8e41";
+				document.getElementById("downarrow").style.transform = "translateY(4px)";
+				document.getElementById("downarrow").style.boxShadow = "0 1px #666";
+			}
+
+			if(event.key === "ArrowRight"){
+				keys.right = true;
+				document.getElementById("rightarrow").style.backgroundColor = "#3e8e41";
+				document.getElementById("rightarrow").style.transform = "translateY(4px)";
+				document.getElementById("rightarrow").style.boxShadow = "0 1px #666";
+			}
+
+			if(event.key === "ArrowLeft"){
+				keys.left= true;
+				document.getElementById("leftarrow").style.backgroundColor = "#3e8e41";
+				document.getElementById("leftarrow").style.transform = "translateY(4px)";
+				document.getElementById("leftarrow").style.boxShadow = "0 1px #666";
+			}
+			makeRequest();
+		});
+
+		//Keyup Function
+		window.addEventListener("keyup", (event) =>{
+			if(event.key === "w"){
+				keys.w = false;
+				document.getElementById("w").style.backgroundColor = "#4CAF50";
+				document.getElementById("w").style.transform = "translateY(0px)";
+				document.getElementById("w").style.boxShadow = "0 9px #999";
+			}
+
+			if(event.key === "a"){
+				keys.a = false;
+				document.getElementById("a").style.backgroundColor = "#4CAF50";
+				document.getElementById("a").style.transform = "translateY(0px)";
+				document.getElementById("a").style.boxShadow = "0 9px #999";
+			}
+
+			if(event.key === "s"){
+				keys.s = false;
+				document.getElementById("s").style.backgroundColor = "#4CAF50";
+				document.getElementById("s").style.transform = "translateY(0px)";
+				document.getElementById("s").style.boxShadow = "0 9px #999";
+			}
+
+			if(event.key === "d"){
+				keys.d = false;
+				document.getElementById("d").style.backgroundColor = "#4CAF50";
+				document.getElementById("d").style.transform = "translateY(0px)";
+				document.getElementById("d").style.boxShadow = "0 9px #999";
+			}
+
+			if(event.key === "ArrowUp"){
+				keys.up = false;
+				document.getElementById("uparrow").style.backgroundColor = "#4CAF50";
+				document.getElementById("uparrow").style.transform = "translateY(0px)";
+				document.getElementById("uparrow").style.boxShadow = "0 9px #999";
+			}
+
+			if(event.key === "ArrowDown"){
+				keys.down = false;
+				document.getElementById("downarrow").style.backgroundColor = "#4CAF50";
+				document.getElementById("downarrow").style.transform = "translateY(0px)";
+				document.getElementById("downarrow").style.boxShadow = "0 9px #999";
+			}
+
+			if(event.key === "ArrowRight"){
+				keys.right = false;
+				document.getElementById("rightarrow").style.backgroundColor = "#4CAF50";
+				document.getElementById("rightarrow").style.transform = "translateY(0px)";
+				document.getElementById("rightarrow").style.boxShadow = "0 9px #999";
+			}
+
+			if(event.key === "ArrowLeft"){
+				keys.left = false;
+				document.getElementById("leftarrow").style.backgroundColor = "#4CAF50";
+				document.getElementById("leftarrow").style.transform = "translateY(0px)";
+				document.getElementById("leftarrow").style.boxShadow = "0 9px #999";
+			}
+			makeRequest();
+		});
+	</script>
+	<script>
+		function makeRequest() {
+			var xhttp = new XMLHttpRequest();
+			xhttp.open("POST", "", true);
+			xhttp.setRequestHeader("Content-type", "application/JSON");
+			xhttp.send(JSON.stringify(keys));
+		}
+	</script>
+</body>
+</html>
