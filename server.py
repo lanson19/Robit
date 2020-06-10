@@ -1,18 +1,35 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
-state = ""
+state = '{"w":false,"a":false,"s":false,"d":false,"up":false,"left":false,"down":false,"right":false}'
 
 class S(BaseHTTPRequestHandler):
     def _set_response(self):
         self.send_response(200)
         self.send_header('Content-type', 'text/html')
         self.end_headers()
+        
+    def _set_response_css(self):
+        self.send_response(200)
+        self.send_header('Content-type', 'text/css')
+        self.end_headers()
 
     def do_GET(self):
         global state
-        self._set_response()
+        if self.path == '/':
+            self._set_response()
+            f = open("index.html", "r")
+            self.wfile.write(f.read().encode('utf-8'))
+
+        if self.path == '/styles.css':
+            self._set_response_css()
+            f = open("styles.css", "r")
+            self.wfile.write(f.read().encode('utf-8'))
+
+        if self.path == '/state':
+            self._set_response()
+            self.wfile.write(state.encode('utf-8'))
         #self.wfile.write("GET request for {}".format(self.path).encode('utf-8'))
-        self.wfile.write(state.encode('utf-8'))
+        
 
     def do_POST(self):
         global state
